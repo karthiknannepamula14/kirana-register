@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import java.text.DecimalFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Collections;
@@ -65,11 +66,12 @@ public class TransactionService {
     }
 
     private DailyReport calculateDailyReport(List<Transaction> transactions, LocalDate date) {
+        DecimalFormat df = new DecimalFormat("#.##");
         double totalAmount = transactions.stream().mapToDouble(Transaction::getConvertedProductAmountInINR).sum();
         return DailyReport.builder()
                 .totalAmountInINR(totalAmount)
                 .totalTransactions(transactions.size())
-                .averageAmountInINR(transactions.size() > 0 ? totalAmount / transactions.size() : 0)
+                .averageAmountInINR(new Double(df.format(transactions.size() > 0 ? totalAmount / transactions.size() : 0)))
                 .date(date).build();
     }
 
