@@ -1,6 +1,6 @@
 Kirana Register
 ----
-This was development as an assignment for JAR. This is used for managing transactions.
+This was developed as part of an assignment for JAR. This is used for managing transactions.
 
 ## Features
 * Record a transaction
